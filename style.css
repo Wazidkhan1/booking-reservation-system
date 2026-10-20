@@ -1,0 +1,146 @@
+/* 1. Shared colors, typography, and controls. */
+:root {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #283f32;
+  background: #f8f9f4;
+  --green: #2e513d;
+  --border: #dce3d4;
+  --muted: #73806a;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button, input, select { border-radius: 6px; }
+button { padding: 12px 17px; border: 1px solid var(--green); background: var(--green); color: white; font-size: 13px; font-weight: 600; }
+button:hover { background: #213d2c; }
+button:disabled { opacity: .6; cursor: wait; }
+.secondary { color: var(--green); background: transparent; border-color: var(--border); }
+.secondary:hover { background: #edf1e6; }
+.text-button { background: none; color: var(--green); border: 0; padding: 8px 0; font-size: 12px; }
+.text-button:hover { background: none; text-decoration: underline; }
+label { display: flex; flex-direction: column; gap: 7px; font-size: 12px; font-weight: 600; }
+input, select { width: 100%; min-width: 0; padding: 11px; border: 1px solid var(--border); background: white; color: #32472d; font-size: 13px; }
+input::placeholder { color: #9aa38f; }
+:focus-visible { outline: 3px solid #d5a17c; outline-offset: 4px; }
+h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+h2 { font-size: 29px; letter-spacing: -.7px; margin: 0; }
+p { line-height: 1.7; }
+.muted { font-size: 12px; color: var(--muted); font-weight: 400; }
+.eyebrow { font-size: 10px; color: #83916e; letter-spacing: 1.8px; font-weight: 600; margin: 0 0 10px; }
+.panel { border: 1px solid var(--border); background: white; border-radius: 10px; padding: 24px; }
+.error { color: #ad513c; font-size: 12px; }
+.error:empty { display: none; }
+.checkbox { flex-direction: row; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); font-weight: 400; }
+.checkbox input { width: 15px; height: 15px; accent-color: var(--green); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* 2. Header and page layout. */
+header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px max(6%, calc((100vw - 1160px) / 2)); border-bottom: 1px solid var(--border); background: #f0f3e9; }
+.brand { font-size: 32px; font-weight: 700; letter-spacing: -1.5px; }
+.brand span { color: #d5885c; }
+nav { display: flex; gap: 26px; font-size: 13px; }
+nav a:hover { text-decoration: underline; }
+.account { display: flex; align-items: center; gap: 12px; font-size: 12px; }
+.account button { font-size: 11px; padding: 8px 12px; }
+main { max-width: 1160px; margin: auto; padding: 0 28px; }
+section { scroll-margin-top: 24px; }
+.intro { padding: 58px 0 36px; }
+h1 { font-size: clamp(39px, 5vw, 62px); line-height: 1.1; letter-spacing: -2px; margin: 15px 0; }
+h1 em { color: #87946f; }
+.intro > p:not(.eyebrow) { color: var(--muted); font-size: 14px; }
+.intro-tags { display: flex; gap: 24px; color: #7c8c69; font-size: 11px; margin-top: 28px; }
+.intro-tags span::before { content: '✓'; margin-right: 6px; }
+.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin: 35px 0 21px; }
+.section-heading .eyebrow { font-size: 9px; }
+
+/* 3. Sign in, search, and booking forms. */
+.auth-panel { background: #edf1e5; }
+.auth-panel > div { margin-bottom: 20px; }
+.auth-panel h2 { font-size: 24px; }
+.auth-panel p:not(.eyebrow):not(.error) { font-size: 12px; color: var(--muted); margin-bottom: 0; }
+#auth-form { display: flex; align-items: end; flex-wrap: wrap; gap: 15px; }
+#auth-form label { flex: 1; min-width: 150px; }
+.auth-actions { display: flex; align-items: center; gap: 15px; }
+.search-form { display: grid; grid-template-columns: 1.3fr 1fr 1fr .65fr 1.3fr auto; gap: 14px; align-items: end; padding: 20px; }
+.search-form label { font-size: 11px; }
+.search-form button { white-space: nowrap; }
+.search-form button span { margin-left: 10px; }
+.results-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 20px; }
+.results-heading p { font-size: 12px; color: var(--muted); margin: 0; }
+.rules { font-size: 10px; margin: 8px 0 18px; }
+.booking-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 26px; background: #edf1e5; }
+#booking-details { font-size: 13px; color: var(--muted); }
+.price { font-size: 24px; font-weight: 600; margin-bottom: 0; }
+.price small { font-size: 11px; color: var(--muted); font-weight: 400; }
+.booking-panel form > p { font-size: 11px; }
+
+/* 4. Room cards and booking history. All art is CSS, so there are no asset folders. */
+.room-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.room-card { border: 1px solid var(--border); background: white; border-radius: 10px; overflow: hidden; }
+.room-art { height: 85px; background: #dbe3cc; position: relative; overflow: hidden; }
+.room-art::before { content: ''; position: absolute; width: 115px; height: 150px; border: 15px solid #b5c3a0; border-radius: 70px 70px 0 0; right: 30px; top: 17px; }
+.room-art::after { content: '✳'; position: absolute; color: #f6f8ee; font-size: 100px; line-height: 1; top: 0; left: 25px; }
+.room-art.private-office { background: #e8dcc8; }
+.room-art.private-office::before { border-color: #ceba9c; }
+.room-art.creative-studio { background: #e6d3c5; }
+.room-art.creative-studio::before { border-color: #c79f86; }
+.room-body { padding: 20px; }
+.room-kind { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.room-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.status { font-size: 10px; color: #708b54; background: #eff4e7; padding: 4px 7px; border-radius: 5px; }
+.status.reserved, .status.cancelled { color: #a17d62; background: #f3eae1; }
+.status.completed { color: #7c8972; background: #eef1e9; }
+.room-card h3 { font-size: 26px; letter-spacing: -.7px; margin: 15px 0 8px; }
+.room-location { color: var(--muted); font-size: 11px; margin: 0 0 14px; }
+.amenities { font-size: 10px; line-height: 1.8; color: #849474; min-height: 36px; }
+.room-bottom { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
+.room-bottom strong { font-size: 22px; font-weight: 500; }
+.room-bottom small { font-size: 10px; color: var(--muted); }
+.room-bottom button { font-size: 11px; padding: 10px 12px; }
+.room-bottom button:disabled { cursor: not-allowed; }
+.booking-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid var(--border); background: white; padding: 22px; border-radius: 8px; margin-bottom: 13px; }
+.booking-row h3 { font-size: 24px; margin: 9px 0; }
+.booking-row p { font-size: 12px; color: var(--muted); margin: 5px 0; }
+.booking-row .reference { font-size: 10px; }
+.booking-row .booking-actions { display: flex; align-items: end; flex-direction: column; gap: 14px; }
+.booking-actions strong { font-size: 22px; font-weight: 500; }
+.booking-actions button { font-size: 11px; padding: 9px 12px; }
+.empty { grid-column: 1 / -1; text-align: center; padding: 35px 20px; background: #f0f3e9; border: 1px dashed #d3ddc6; border-radius: 8px; color: var(--muted); font-size: 13px; }
+.message { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: #2b4634; color: white; max-width: 90vw; width: max-content; border-radius: 8px; padding: 14px 22px; font-size: 12px; box-shadow: 0 5px 25px #20302322; z-index: 5; }
+footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--border); margin-top: 45px; padding: 24px 0; }
+footer strong { font-family: Georgia, serif; font-size: 22px; font-weight: 400; }
+footer span { font-size: 10px; color: var(--muted); }
+
+/* 5. Two responsive breakpoints keep the layout easy to understand. */
+@media (max-width: 950px) {
+  .search-form { grid-template-columns: repeat(3, 1fr); }
+  .room-grid { grid-template-columns: repeat(2, 1fr); }
+  header { padding: 20px 28px; }
+  .auth-actions { flex-wrap: wrap; }
+}
+@media (max-width: 600px) {
+  main { padding: 0 18px; }
+  header { padding: 17px 18px; flex-wrap: wrap; gap: 15px; }
+  .brand { font-size: 29px; }
+  nav { font-size: 12px; gap: 17px; }
+  .account { width: 100%; justify-content: space-between; font-size: 11px; }
+  .intro { padding-top: 35px; }
+  h1 { font-size: 40px; letter-spacing: -1.5px; }
+  .intro-tags { flex-wrap: wrap; gap: 10px 15px; font-size: 10px; }
+  .section-heading { align-items: start; flex-direction: column; gap: 12px; }
+  h2 { font-size: 26px; }
+  .panel { padding: 20px; }
+  #auth-form { flex-direction: column; align-items: stretch; }
+  #auth-form label { min-width: 0; }
+  .search-form { grid-template-columns: 1fr 1fr; }
+  .room-grid { grid-template-columns: 1fr; }
+  .booking-panel { grid-template-columns: 1fr; gap: 15px; }
+  .booking-row { align-items: start; flex-direction: column; gap: 12px; }
+  .booking-row .booking-actions { width: 100%; flex-direction: row; justify-content: space-between; align-items: center; }
+  .rules { font-size: 9px; }
+  .checkbox { font-size: 10px; }
+  footer { align-items: start; flex-direction: column; }
+}

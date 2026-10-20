@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple workspace booking and reservation system.">
+  <title>Roomly | Booking and Reservation System</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">roomly<span>.</span></a>
+    <nav aria-label="Main navigation"><a href="#spaces">Find a room</a><a href="#my-bookings">My bookings</a></nav>
+    <div class="account"><span id="user-name">Welcome, guest</span><button id="logout" class="secondary" hidden>Sign out</button></div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">BOOKING AND RESERVATION SYSTEM</p>
+      <h1>A little room for<br><em>your next big idea.</em></h1>
+      <p>Choose a room, pick a time, and make it yours.</p>
+      <div class="intro-tags"><span>6 thoughtfully designed spaces</span><span>Hourly booking</span><span>Instant confirmation</span></div>
+    </section>
+
+    <!-- 1. One form handles both registration and sign-in. -->
+    <section id="auth-section" class="panel auth-panel" aria-labelledby="auth-title">
+      <div><p class="eyebrow">START HERE</p><h2 id="auth-title">Sign in to book a room</h2><p>Create an account if this is your first visit.</p></div>
+      <form id="auth-form">
+        <label id="name-field" hidden>Your name<input id="name" autocomplete="name" minlength="2" maxlength="80" placeholder="Your name"></label>
+        <label>Email<input id="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" required maxlength="128" placeholder="Your password"></label>
+        <div class="auth-actions"><button id="auth-submit" type="submit">Sign in</button><button id="toggle-auth" class="text-button" type="button">Create an account</button></div>
+      </form>
+      <p id="auth-error" class="error" role="alert"></p>
+    </section>
+
+    <!-- 2. Search parameters are sent to GET /api/rooms. -->
+    <section id="spaces" aria-labelledby="spaces-title">
+      <div class="section-heading"><div><p class="eyebrow">FIND YOUR FIT</p><h2 id="spaces-title">Spaces for a good workday</h2></div><span class="muted">Raipur, India · IST</span></div>
+      <form id="search-form" class="panel search-form">
+        <label>Date<input id="date" type="date" required></label>
+        <label>From<select id="start" aria-label="Start time"></select></label>
+        <label>Until<select id="end" aria-label="End time"></select></label>
+        <label>Guests<input id="guests" type="number" min="1" max="100" value="1" required></label>
+        <label>Room type<select id="kind"><option value="all">All spaces</option><option value="meeting-room">Meeting rooms</option><option value="private-office">Private offices</option><option value="creative-studio">Creative studios</option></select></label>
+        <button type="submit">Find rooms <span aria-hidden="true">↗</span></button>
+      </form>
+      <div class="results-heading"><p id="results" role="status">Loading rooms…</p><label class="checkbox"><input id="available-only" type="checkbox">Available only</label></div>
+      <p class="muted rules">Open 08:00–22:00 IST · Book 30 minutes to 8 hours · Up to 90 days ahead</p>
+      <div id="rooms" class="room-grid" aria-busy="true"></div>
+    </section>
+
+    <!-- 3. Selecting a room reveals this normal form; no dialog/state framework. -->
+    <section id="booking-section" class="panel booking-panel" hidden aria-labelledby="booking-title">
+      <div><p class="eyebrow">MAKE IT YOURS</p><h2 id="booking-title" tabindex="-1">Confirm your booking</h2><p id="booking-details"></p><p id="booking-price" class="price"></p></div>
+      <form id="booking-form"><label>Purpose <span class="muted">(optional)</span><input id="purpose" maxlength="160" placeholder="Team meeting, deep work…"></label><p class="muted">No payment collected. Cancel for free before your booking starts.</p><div class="actions"><button id="confirm-booking" type="submit">Confirm booking</button><button id="close-booking" type="button" class="secondary">Go back</button></div><p id="booking-error" class="error" role="alert"></p></form>
+    </section>
+
+    <!-- 4. The server returns only the current user's bookings. -->
+    <section id="my-bookings" aria-labelledby="bookings-title">
+      <div class="section-heading"><div><p class="eyebrow">YOUR PLANS, ALL IN ONE PLACE</p><h2 id="bookings-title">My bookings</h2></div><label class="checkbox"><input id="show-history" type="checkbox">Show past & cancelled</label></div>
+      <div id="bookings" class="booking-list"><p class="empty">Sign in to see your bookings.</p></div>
+    </section>
+
+    <footer><strong>Room to do more.</strong><span>Roomly · Booking and Reservation System</span></footer>
+  </main>
+  <p id="message" class="message" role="status" aria-live="polite" hidden></p>
+</body>
+</html>
